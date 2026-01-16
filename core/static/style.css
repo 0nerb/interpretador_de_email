@@ -1,0 +1,36 @@
+/* Configurações Globais de Fonte */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Animações e Efeitos */
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Estado Ativo do Drag & Drop (Arrastar) */
+.drag-active {
+    border-color: #4F46E5 !important; /* Indigo 600 */
+    background-color: #EEF2FF !important; /* Indigo 50 */
+    transform: scale(1.02);
+}
+
+/* Estilização da Barra de Rolagem */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1; 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; 
+}
