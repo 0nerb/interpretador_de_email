@@ -53,9 +53,9 @@ def analisar_email_com_gemini(texto_email):
     --- FIM DO EMAIL ---
 
     Sua tarefa:
-    1. Classifique se é "Produtivo" (precisa de ação/resposta técnica) ou "Improdutivo" (apenas agradecimento/spam).
+    1. Classifique se é "Produtivo" (precisa de ação/resposta técnica) ou "Improdutivo" (agradecimentos/felicitacoes).
     2. Explique brevemente o motivo.
-    3. Se for Produtivo, escreva uma sugestão de resposta educada e profissional. Se for Improdutivo, a sugestão deve ser apenas "Nenhuma resposta necessária".
+    3. Se for Produtivo, escreva uma sugestão de resposta educada e profissional. Se for Improdutivo, a sugestão deve ser uma mensagem retribuindo o agradecimento.
 
     Responda EXATAMENTE neste formato padrão (sem markdown de código):
     Categoria: [Produtivo/Improdutivo]
