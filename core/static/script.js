@@ -13,7 +13,9 @@
             
             // Formata bytes para KB/MB
             function formatBytes(bytes, decimals = 2) {
-                if (!+bytes) return '0 Bytes';
+                if (!+bytes) 
+                    return '0 Bytes';
+
                 const k = 1024;
                 const dm = decimals < 0 ? 0 : decimals;
                 const sizes = ['Bytes', 'KB', 'MB', 'GB'];
@@ -89,7 +91,6 @@
 
                 // Simulação de delay (Remover em produção)
                 setTimeout(() => {
-                    alert('Arquivo pronto para envio ao Django!');
                     submitBtn.innerHTML = originalContent;
                     submitBtn.disabled = false;
                     submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');

@@ -9,14 +9,23 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Estado Ativo do Drag & Drop (Arrastar) */
 .drag-active {
-    border-color: #4F46E5 !important; /* Indigo 600 */
-    background-color: #EEF2FF !important; /* Indigo 50 */
+    border-color: #4F46E5 !important;
+    /* Indigo 600 */
+    background-color: #EEF2FF !important;
+    /* Indigo 50 */
     transform: scale(1.02);
 }
 
@@ -24,13 +33,95 @@ body {
 ::-webkit-scrollbar {
     width: 8px;
 }
+
 ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: #f1f1f1;
 }
+
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1; 
+    background: #cbd5e1;
     border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8; 
+    background: #94a3b8;
+}
+
+.help-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.help-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #4a90e2;
+    /* Azul do seu tema */
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.help-icon:hover {
+    transform: scale(1.1);
+    background-color: #357abd;
+}
+
+/* O balão de texto (Tooltip) */
+.help-tooltip {
+    visibility: hidden;
+    width: 280px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 15px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    /* Posiciona abaixo do ícone */
+    right: 0;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* A setinha do balão */
+.help-tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    right: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
+}
+
+/* Mostrar o tooltip quando passar o mouse no container */
+.help-container:hover .help-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Destaque para o formato */
+.code-snippet {
+    background-color: #444;
+    padding: 8px;
+    border-radius: 4px;
+    display: block;
+    margin: 8px 0;
+    font-family: monospace;
+    border-left: 3px solid #4a90e2;
 }
