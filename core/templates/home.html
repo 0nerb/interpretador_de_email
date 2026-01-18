@@ -130,47 +130,71 @@
             </p>
         </div>
 
-        {% if resultado %}
-<div class="mt-6 p-6 rounded-xl border border-slate-200 shadow-sm bg-white animate-fade-in">
-    
-    <div class="flex items-center gap-3 mb-4">
-        <div class="p-2 rounded-lg {% if 'Produtivo' in resultado.categoria %}bg-amber-100 text-amber-600{% else %}bg-green-100 text-green-600{% endif %}">
-            <i class="fa-solid {% if 'Produtivo' in resultado.categoria %}fa-briefcase{% else %}fa-check{% endif %}"></i>
-        </div>
-        <div>
-            <h3 class="font-bold text-slate-800">Análise da IA</h3>
-            <p class="text-sm text-slate-500">
-                Classificado como: 
-                <span class="font-bold {% if 'Produtivo' in resultado.categoria %}text-amber-600{% else %}text-green-600{% endif %}">
-                    {{ resultado.categoria }}
-                </span>
-            </p>
-        </div>
-    </div>
+{% if resultado %}
 
-    <div class="mb-4 text-sm text-slate-600 bg-slate-50 p-3 rounded-lg">
-        <strong>Motivo:</strong> {{ resultado.motivo }}
-    </div>
+    {% if resultado.status == 'sucesso' %}
+        <div class="mt-6 p-6 rounded-xl border border-slate-200 shadow-sm bg-white animate-fade-in">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="p-2 rounded-lg {% if 'Produtivo' in resultado.categoria_final %}bg-amber-100 text-amber-600{% else %}bg-green-100 text-green-600{% endif %}">
+                    <i class="fa-solid {% if 'Produtivo' in resultado.categoria_final %}fa-briefcase{% else %}fa-check{% endif %}"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800">Análise Confirmada</h3>
+                    <p class="text-sm text-slate-500">
+                        Classificação: 
+                        <span class="font-bold uppercase">{{ resultado.categoria_final }}</span>
+                    </p>
+                </div>
+            </div>
 
-    {% if resultado.sugestao_resposta and resultado.sugestao_resposta != "Nenhuma resposta necessária" %}
-    <div class="mt-4">
-        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
-            Sugestão de Resposta Automática
-        </label>
-        <div class="relative">
-            <textarea readonly class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm text-slate-700 h-40 focus:outline-none resize-none">
-{{ resultado.sugestao_resposta }}
-            </textarea>
-            <button onclick="navigator.clipboard.writeText(this.previousElementSibling.value); alert('Copiado!')" class="absolute top-2 right-2 text-xs bg-white border border-slate-200 px-2 py-1 rounded hover:bg-slate-100 text-slate-500">
-                <i class="fa-regular fa-copy"></i> Copiar
-            </button>
+            <div class="mb-4 text-sm text-slate-600 bg-slate-50 p-3 rounded-lg">
+                <strong>Motivo:</strong> {{ resultado.motivo }}
+            </div>
+
+            {% if resultado.sugestao_resposta and resultado.sugestao_resposta != "Nenhuma resposta necessária" %}
+            <div class="mt-4">
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
+                    Sugestão de Resposta
+                </label>
+                <textarea readonly class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm text-slate-700 h-40 focus:outline-none resize-none">{{ resultado.sugestao_resposta }}</textarea>
+            </div>
+            {% endif %}
         </div>
-    </div>
+
+    {% elif resultado.status == 'conflito' %}
+        <div class="mt-6 p-6 rounded-xl border-l-4 border-yellow-400 bg-yellow-50 shadow-sm animate-fade-in">
+            <div class="flex items-start gap-4">
+                <div class="text-yellow-600 mt-1">
+                    <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-yellow-800 text-lg">Atenção: Análise Inconclusiva</h3>
+                    <p class="text-yellow-700 mt-1 font-medium">
+                        {{ resultado.mensagem_aviso }}
+                    </p>
+                    <p class="text-xs text-yellow-600 mt-2 italic">
+                        {{ resultado.detalhe_conflito }}
+                    </p>
+                    
+                    <details class="mt-4">
+                        <summary class="text-xs font-bold text-yellow-700 cursor-pointer hover:underline">
+                            Ver sugestão da IA mesmo assim
+                        </summary>
+                        <div class="mt-2 p-3 bg-white/50 rounded border border-yellow-200 text-sm text-slate-700">
+                            {{ resultado.sugestao_ia_opcional|linebreaksbr }}
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+        
+    {% else %}
+        <div class="mt-6 p-4 bg-red-100 text-red-700 rounded-lg border border-red-200">
+            <strong>Erro:</strong> {{ resultado.mensagem }}
+        </div>
     {% endif %}
 
-</div>
 {% endif %}
-    </div>
 
     <script src="{% static 'js/script.js' %}"></script>
 </body>
