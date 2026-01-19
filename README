@@ -1,0 +1,121 @@
+📧 Interpretador de Email Inteligente
+Uma aplicação web desenvolvida em Django que utiliza uma abordagem híbrida de Processamento de Linguagem Natural (NLP) e Inteligência Artificial Generativa (Google Gemini) para classificar emails e sugerir respostas automáticas.
+
+🚀 Funcionalidades
+Entrada Flexível: Aceita upload de arquivos (.pdf, .txt) ou inserção manual de texto.
+
+Interface Moderna: Drag-and-drop para arquivos e feedback visual instantâneo (construído com Tailwind CSS e JavaScript).
+
+Sistema de Análise Híbrido:
+
+Regras (NLTK): Pré-processamento, stemming (RSLP), remoção de acentos/stopwords e classificação ultra-rápida via Tabela Hash.
+
+IA (Google Gemini): Análise contextual profunda e geração de respostas.
+
+Consenso Inteligente: O sistema compara a classificação das Regras com a da IA. Se houver divergência, o usuário é alertado; se houver consenso, a resposta é liberada.
+
+Segurança: Validação rigorosa de tipos de arquivo (MIME type e extensão) e proteção CSRF.
+
+🛠️ Tecnologias Utilizadas
+Backend: Python 3, Django
+
+Frontend: HTML5, Tailwind CSS (CDN), JavaScript (Vanilla)
+
+IA & NLP: Google Generative AI (Gemini Pro), NLTK, PyPDF2
+
+Ambiente: Python-dotenv (variáveis de ambiente)
+
+💻 Pré-requisitos
+Antes de começar, certifique-se de ter instalado em sua máquina:
+
+Python 3.10+
+
+Git
+
+Uma chave de API do Google Gemini (Obtenha aqui)
+
+📝 Como executar o projeto localmente
+Siga os passos abaixo para configurar o ambiente e rodar a aplicação:
+
+1. Clone o repositório
+Bash
+
+git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+cd InterpretadorDeEmail
+2. Crie e ative o ambiente virtual
+Recomendado para isolar as dependências do projeto.
+
+No macOS / Linux:
+
+Bash
+
+python3 -m venv venv
+source venv/bin/activate
+No Windows:
+
+Bash
+
+python -m venv venv
+.\venv\Scripts\activate
+3. Instale as dependências
+Bash
+
+pip install -r requirements.txt
+(Nota: Se o arquivo requirements.txt ainda não existir, instale manualmente as libs usadas: django, google-generativeai, python-dotenv, nltk, pypdf)
+
+4. Configure as Variáveis de Ambiente
+Por segurança, a chave da API não é versionada.
+
+Crie um arquivo chamado .env na raiz do projeto (mesma pasta do manage.py).
+
+Adicione sua chave do Gemini nele:
+
+Snippet de código
+
+GEMINI_API_KEY=sua_chave_secreta_aqui_sem_aspas
+5. Configuração do Banco de Dados e Arquivos Estáticos
+Execute as migrações iniciais do Django:
+
+Bash
+
+python manage.py makemigrations
+python manage.py migrate
+6. Execute o Servidor
+Bash
+
+python manage.py runserver
+Acesse a aplicação em seu navegador: http://127.0.0.1:8000/
+
+📂 Estrutura do Projeto
+Plaintext
+
+InterpretadorDeEmail/
+├── core/
+│   ├── static/
+│   │   ├── css/style.css      # Estilos personalizados
+│   │   └── js/script.js       # Lógica de Drag & Drop e UI
+│   ├── templates/
+│   │   └── home.html          # Template principal
+│   ├── forms.py               # Validação de uploads
+│   ├── models.py              # Modelo de banco de dados
+│   ├── nlp_service.py         # Cérebro da aplicação (Regras + IA)
+│   └── views.py               # Lógica de controle
+├── config/                    # Configurações do Django (settings, urls)
+├── media/                     # Arquivos temporários (uploads)
+├── .env                       # Variáveis de ambiente (NÃO COMITAR)
+├── .gitignore                 # Arquivos ignorados pelo Git
+└── manage.py
+🧠 Como funciona a Lógica Híbrida
+O sistema processa cada email em 4 etapas:
+
+Pré-processamento: O texto é limpo, acentos são removidos (unicodedata), Stop Words são eliminadas e as palavras são reduzidas ao seu radical (Stemming com RSLP).
+
+Classificação por Regras: O algoritmo verifica a presença dos radicais em tabelas Hash de palavras "Produtivas" (ex: problem, err, ajud) e "Improdutivas" (ex: obrig, paraben).
+
+Consulta à IA: O texto original e as palavras-chave processadas são enviados ao Gemini Pro, que analisa o contexto semântico.
+
+Consenso:
+
+Se Regras e IA concordam (ex: ambos dizem "Produtivo") -> Sucesso ✅.
+
+Se discordam -> O sistema emite um alerta de ambiguidade ⚠️.
