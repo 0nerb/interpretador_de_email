@@ -1,86 +1,51 @@
-<div align="center">
+# Processador de Email Inteligente 📧
 
-# 📧 Interpretador de Email Inteligente
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Django](https://img.shields.io/badge/Django-5.0-green)
+![Gemini AI](https://img.shields.io/badge/AI-Google_Gemini-8E75B2)
+![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)
 
-### Classificação Híbrida de Emails com NLP & IA Generativa
-
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Google Gemini](https://img.shields.io/badge/Google%20Gemini-AI-8E75B2?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-
-<br />
-
-<p align="center">
-  <a href="#-sobre">Sobre</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-como-funciona">Lógica Híbrida</a> •
-  <a href="#-instalação">Instalação</a> •
-  <a href="#-tecnologias">Tecnologias</a>
-</p>
-
-</div>
+Uma aplicação web desenvolvida em Django que utiliza Inteligência Artificial e Processamento de Linguagem Natural (NLP) para automatizar a triagem de emails. O sistema classifica mensagens, identifica urgências e sugere respostas técnicas automaticamente.
 
 ---
 
-## 📸 Demonstração
+## 📋 Sobre o Projeto
 
-<div align="center">
-  <img src="./assets/demo_screenshot.png" alt="Screenshot do Projeto" width="700">
-  <p><em>Interface moderna com suporte a Drag & Drop e análise em tempo real.</em></p>
-</div>
+Este projeto resolve o problema de caixas de entrada lotadas através de uma **abordagem híbrida**:
 
----
+1.  **Regras Rápidas (NLP Clássico):** Utiliza NLTK e `RSLPStemmer` para reduzir palavras à sua raiz e verificar tabelas Hash instantaneamente.
+2.  **Inteligência Cognitiva (LLM):** Utiliza a API do **Google Gemini Pro** para entender o contexto, ironia e nuances do texto.
+3.  **Sistema de Consenso:** O sistema compara as duas análises. Se houver divergência (ex: IA diz uma coisa e Regras dizem outra), o usuário é alertado sobre a ambiguidade.
 
-## 💡 Sobre
+## 🚀 Funcionalidades
 
-O **Interpretador de Email Inteligente** é uma solução web que automatiza a triagem de caixas de entrada. Diferente de soluções comuns, ele utiliza uma **arquitetura de consenso**: combina a velocidade de regras baseadas em NLP clássico (NLTK) com a compreensão contextual de LLMs (Google Gemini).
+- **Upload Drag & Drop:** Interface moderna para envio de arquivos `.txt` e `.pdf` ou digitação manual.
+- **Classificação Automática:** Categoriza emails em:
+    - `Produtivo`: Requer ação técnica, suporte ou resposta (ex: bugs, dúvidas).
+    - `Improdutivo`: Agradecimentos, avisos de férias ou SPAM.
+- **Sugestão de Resposta:** Gera automaticamente uma resposta educada e técnica baseada no problema relatado.
+- **Validação Robusta:** Proteção contra arquivos maliciosos, verificação de tipo MIME e tratamento de erros de encoding.
 
-O objetivo é separar o joio do trigo: identificar emails **Produtivos** (que exigem suporte técnico) de emails **Improdutivos** (agradecimentos, SPAM), sugerindo respostas automáticas precisas.
+## 🛠 Tecnologias Utilizadas
 
----
-
-## 🚀 Features
-
-| Funcionalidade | Descrição |
-| :--- | :--- |
-| **📥 Upload Flexível** | Suporte a arquivos `.pdf`, `.txt` (Drag-and-drop) ou entrada de texto manual. |
-| **🧠 Análise Híbrida** | Validação cruzada entre algoritmo de regras (Stemming) e IA Generativa. |
-| **🎨 UI Responsiva** | Interface limpa e moderna construída com **Tailwind CSS**. |
-| **⚡ Performance** | Uso de **Tabelas Hash** para verificação instantânea de palavras-chave. |
-| **🛡️ Segurança** | Validação de MIME Types, proteção CSRF e variáveis de ambiente (`.env`). |
-| **📝 Smart Reply** | Geração automática de respostas técnicas e educadas via Gemini Pro. |
+- **Backend:** Python 3, Django 5.0
+- **IA & NLP:** Google Generative AI (Gemini), NLTK, PyPDF2
+- **Frontend:** HTML5, TailwindCSS (via CDN), JavaScript Vanilla
+- **Ambiente:** Python-dotenv para gestão segura de chaves de API
 
 ---
 
-## 🧠 Como Funciona (O "Cérebro")
+## 💻 Como Rodar o Projeto Localmente
 
-O diferencial do projeto é o sistema de **Consenso**. O sistema só confirma a classificação se o método clássico e a IA concordarem.
+Siga os passos abaixo para executar a aplicação em sua máquina.
 
-```mermaid
-graph TD
-    A[📩 Entrada do Usuário] --> B{Tipo de Entrada?}
-    B -- Arquivo (PDF/TXT) --> C[Extrator de Texto]
-    B -- Texto Direto --> D[Texto Bruto]
-    C --> D
-    
-    D --> E[⚙️ NLP Clássico]
-    D --> F[🤖 IA Gemini Pro]
-    
-    subgraph "Processamento Paralelo"
-    E --> E1[Remover Acentos & Stopwords]
-    E1 --> E2[Stemming (RSLP)]
-    E2 --> E3[Busca em Hash Table]
-    E3 --> E4(Classificação: Regras)
-    
-    F --> F1[Análise Semântica]
-    F1 --> F2[Geração de Resposta]
-    F2 --> F3(Classificação: IA)
-    end
-    
-    E4 --> G{❓ Consenso?}
-    F3 --> G
-    
-    G -- ✅ Sim (Iguais) --> H[Exibir Resultado & Resposta]
-    G -- ❌ Não (Diferentes) --> I[⚠️ Alerta de Ambiguidade]
+### 1. Pré-requisitos
+Certifique-se de ter o [Python](https://www.python.org/) e o [Git](https://git-scm.com/) instalados.
+
+### 2. Instalação
+
+Clone o repositório e entre na pasta:
+
+```bash
+git clone [https://github.com/SEU-USUARIO/NOME-DO-REPO.git](https://github.com/SEU-USUARIO/NOME-DO-REPO.git)
+cd NOME-DO-REPO
