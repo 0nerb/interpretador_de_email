@@ -16,7 +16,7 @@
   <a href="#-sobre">Sobre</a> •
   <a href="#-features">Features</a> •
   <a href="#-como-funciona">Lógica Híbrida</a> •
-  <a href="#-instalação">Instalação</a> •
+  <a href="#-começando">Instalação</a> •
   <a href="#-tecnologias">Tecnologias</a>
 </p>
 
@@ -118,7 +118,7 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
-## 🔧 Tecnologias Utilizadas
+## 🔧 Tecnologias
 
 ### Backend
 - **Python 3 & Django 5**: Framework web robusto.
