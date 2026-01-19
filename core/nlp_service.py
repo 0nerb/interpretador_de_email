@@ -14,21 +14,22 @@ api_key = os.getenv("GEMINI_API_KEY")
 if api_key:
     genai.configure(api_key=api_key)
 
-def baixar_recursos_nltk():
+def baixar_recursos():
+    nltk_data_path = os.path.join("/tmp", "nltk_data")
+    
+    if nltk_data_path not in nltk.data.path:
+        nltk.data.path.append(nltk_data_path)
+
     recursos = ['punkt', 'stopwords', 'rslp', 'punkt_tab']
+    
     for recurso in recursos:
         try:
-            nltk.data.find(f'tokenizers/{recurso}')
+            nltk.data.find(f'{recurso}')
         except LookupError:
-            try:
-                nltk.data.find(f'corpora/{recurso}')
-            except LookupError:
-                try:
-                    nltk.data.find(f'stemmers/{recurso}')
-                except LookupError:
-                    nltk.download(recurso, quiet=True)
+            print(f"Baixando recurso NLTK: {recurso} para {nltk_data_path}...")
+            nltk.download(recurso, download_dir=nltk_data_path, quiet=True)
 
-baixar_recursos_nltk()
+baixar_recursos()
 
 
 def ler_arquivo(caminho_arquivo):
