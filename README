@@ -1,86 +1,44 @@
-<div align="center">
+# Processador de Email Inteligente 📧
 
-# 📧 Interpretador de Email Inteligente
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat&logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-5.0-092E20?style=flat&logo=django&logoColor=white)
+![Gemini AI](https://img.shields.io/badge/AI-Google_Gemini-8E75B2?style=flat&logo=google&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 
-### Classificação Híbrida de Emails com NLP & IA Generativa
-
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Google Gemini](https://img.shields.io/badge/Google%20Gemini-AI-8E75B2?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-
-<br />
-
-<p align="center">
-  <a href="#-sobre">Sobre</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-como-funciona">Lógica Híbrida</a> •
-  <a href="#-instalação">Instalação</a> •
-  <a href="#-tecnologias">Tecnologias</a>
-</p>
-
-</div>
-
----
-
-## 📸 Demonstração
+Uma aplicação web Full-Stack que utiliza uma **abordagem híbrida** (NLP Clássico + IA Generativa) para triagem automática de emails e sugestão de respostas.
 
 <div align="center">
-  <img src="./assets/demo_screenshot.png" alt="Screenshot do Projeto" width="700">
-  <p><em>Interface moderna com suporte a Drag & Drop e análise em tempo real.</em></p>
+  <img src="image_3ec6f5.png" alt="Interface do Projeto" width="700">
 </div>
 
----
+## 📋 Visão Geral
 
-## 💡 Sobre
+O **Processador de Email Inteligente** é uma ferramenta de produtividade projetada para reduzir o tempo gasto em caixas de entrada. O sistema permite que o usuário faça upload de arquivos (PDF/TXT) ou digite o texto de um email. 
 
-O **Interpretador de Email Inteligente** é uma solução web que automatiza a triagem de caixas de entrada. Diferente de soluções comuns, ele utiliza uma **arquitetura de consenso**: combina a velocidade de regras baseadas em NLP clássico (NLTK) com a compreensão contextual de LLMs (Google Gemini).
+Através de um motor de validação dupla, ele classifica as mensagens como **Produtivas** (que exigem ação técnica) ou **Improdutivas** (spam/agradecimentos) e utiliza o **Google Gemini Pro** para redigir respostas contextuais automaticamente.
 
-O objetivo é separar o joio do trigo: identificar emails **Produtivos** (que exigem suporte técnico) de emails **Improdutivos** (agradecimentos, SPAM), sugerindo respostas automáticas precisas.
+## 🏗️ Arquitetura
 
----
+O projeto segue a arquitetura MVT (Model-View-Template) do Django com uma camada de serviço dedicada à inteligência:
 
-## 🚀 Features
+- **Frontend**: Templates Django estilizados com **Tailwind CSS** e JavaScript (Vanilla) para interatividade.
+- **Backend**: Servidor Python/Django que gerencia uploads, processamento de texto e integração com APIs.
+- **Core de IA**: Serviço híbrido que combina regras de *Stemming* (NLTK) com análise semântica (LLM).
 
-| Funcionalidade | Descrição |
-| :--- | :--- |
-| **📥 Upload Flexível** | Suporte a arquivos `.pdf`, `.txt` (Drag-and-drop) ou entrada de texto manual. |
-| **🧠 Análise Híbrida** | Validação cruzada entre algoritmo de regras (Stemming) e IA Generativa. |
-| **🎨 UI Responsiva** | Interface limpa e moderna construída com **Tailwind CSS**. |
-| **⚡ Performance** | Uso de **Tabelas Hash** para verificação instantânea de palavras-chave. |
-| **🛡️ Segurança** | Validação de MIME Types, proteção CSRF e variáveis de ambiente (`.env`). |
-| **📝 Smart Reply** | Geração automática de respostas técnicas e educadas via Gemini Pro. |
+## 📁 Estrutura do Projeto
 
----
-
-## 🧠 Como Funciona (O "Cérebro")
-
-O diferencial do projeto é o sistema de **Consenso**. O sistema só confirma a classificação se o método clássico e a IA concordarem.
-
-```mermaid
-graph TD
-    A[📩 Entrada do Usuário] --> B{Tipo de Entrada?}
-    B -- Arquivo (PDF/TXT) --> C[Extrator de Texto]
-    B -- Texto Direto --> D[Texto Bruto]
-    C --> D
-    
-    D --> E[⚙️ NLP Clássico]
-    D --> F[🤖 IA Gemini Pro]
-    
-    subgraph "Processamento Paralelo"
-    E --> E1[Remover Acentos & Stopwords]
-    E1 --> E2[Stemming (RSLP)]
-    E2 --> E3[Busca em Hash Table]
-    E3 --> E4(Classificação: Regras)
-    
-    F --> F1[Análise Semântica]
-    F1 --> F2[Geração de Resposta]
-    F2 --> F3(Classificação: IA)
-    end
-    
-    E4 --> G{❓ Consenso?}
-    F3 --> G
-    
-    G -- ✅ Sim (Iguais) --> H[Exibir Resultado & Resposta]
-    G -- ❌ Não (Diferentes) --> I[⚠️ Alerta de Ambiguidade]
+```text
+ProcessadorEmail/
+├── core/                   # Aplicação Principal
+│   ├── static/             # Arquivos Estáticos
+│   │   ├── css/style.css   # Estilos globais
+│   │   └── js/script.js    # Lógica de Drag & Drop
+│   ├── templates/
+│   │   └── home.html       # Interface do Usuário
+│   ├── nlp_service.py      # Lógica Híbrida (Regras + Gemini)
+│   ├── views.py            # Controladores
+│   └── forms.py            # Validação de Arquivos
+├── media/                  # Armazenamento temporário de uploads
+├── .env                    # Variáveis de Ambiente (API Keys)
+├── requirements.txt        # Dependências do projeto
+└── manage.py
