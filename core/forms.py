@@ -31,6 +31,6 @@ class DocumentoForm(forms.ModelForm):
                 
             # (Opcional) Validação de tamanho (ex: limitar a 5MB)
             if arquivo.size > 10 * 1024 * 1024:
-                raise forms.ValidationError("O arquivo é muito grande. Máximo de 5MB.")
+                raise forms.ValidationError("O arquivo é muito grande. Máximo de 10MB.")
 
         return arquivo

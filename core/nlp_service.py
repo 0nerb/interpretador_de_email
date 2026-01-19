@@ -88,7 +88,7 @@ def classificar_por_regras(tokens_processados):
     stems_produtivos = {
         'err', 'falh', 'suport', 'ajud', 'duvid', 'problem', 'urgent',
         'acess', 'bug', 'solicit', 'precis', 'trav', 'atualiz', 'orcament',
-        'cot', 'ped', 'envi', 'nao', 'funcion'
+        'cot', 'ped', 'envi', 'nao', 'funcion', 'aus'
     }
     
     # CONJUNTO DE PALAVRAS IMPRODUTIVAS (HASH TABLE)
