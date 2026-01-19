@@ -1,121 +1,86 @@
-📧 Interpretador de Email Inteligente
-Uma aplicação web desenvolvida em Django que utiliza uma abordagem híbrida de Processamento de Linguagem Natural (NLP) e Inteligência Artificial Generativa (Google Gemini) para classificar emails e sugerir respostas automáticas.
+<div align="center">
 
-🚀 Funcionalidades
-Entrada Flexível: Aceita upload de arquivos (.pdf, .txt) ou inserção manual de texto.
+# 📧 Interpretador de Email Inteligente
 
-Interface Moderna: Drag-and-drop para arquivos e feedback visual instantâneo (construído com Tailwind CSS e JavaScript).
+### Classificação Híbrida de Emails com NLP & IA Generativa
 
-Sistema de Análise Híbrido:
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-AI-8E75B2?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-Regras (NLTK): Pré-processamento, stemming (RSLP), remoção de acentos/stopwords e classificação ultra-rápida via Tabela Hash.
+<br />
 
-IA (Google Gemini): Análise contextual profunda e geração de respostas.
+<p align="center">
+  <a href="#-sobre">Sobre</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-como-funciona">Lógica Híbrida</a> •
+  <a href="#-instalação">Instalação</a> •
+  <a href="#-tecnologias">Tecnologias</a>
+</p>
 
-Consenso Inteligente: O sistema compara a classificação das Regras com a da IA. Se houver divergência, o usuário é alertado; se houver consenso, a resposta é liberada.
+</div>
 
-Segurança: Validação rigorosa de tipos de arquivo (MIME type e extensão) e proteção CSRF.
+---
 
-🛠️ Tecnologias Utilizadas
-Backend: Python 3, Django
+## 📸 Demonstração
 
-Frontend: HTML5, Tailwind CSS (CDN), JavaScript (Vanilla)
+<div align="center">
+  <img src="./assets/demo_screenshot.png" alt="Screenshot do Projeto" width="700">
+  <p><em>Interface moderna com suporte a Drag & Drop e análise em tempo real.</em></p>
+</div>
 
-IA & NLP: Google Generative AI (Gemini Pro), NLTK, PyPDF2
+---
 
-Ambiente: Python-dotenv (variáveis de ambiente)
+## 💡 Sobre
 
-💻 Pré-requisitos
-Antes de começar, certifique-se de ter instalado em sua máquina:
+O **Interpretador de Email Inteligente** é uma solução web que automatiza a triagem de caixas de entrada. Diferente de soluções comuns, ele utiliza uma **arquitetura de consenso**: combina a velocidade de regras baseadas em NLP clássico (NLTK) com a compreensão contextual de LLMs (Google Gemini).
 
-Python 3.10+
+O objetivo é separar o joio do trigo: identificar emails **Produtivos** (que exigem suporte técnico) de emails **Improdutivos** (agradecimentos, SPAM), sugerindo respostas automáticas precisas.
 
-Git
+---
 
-Uma chave de API do Google Gemini (Obtenha aqui)
+## 🚀 Features
 
-📝 Como executar o projeto localmente
-Siga os passos abaixo para configurar o ambiente e rodar a aplicação:
+| Funcionalidade | Descrição |
+| :--- | :--- |
+| **📥 Upload Flexível** | Suporte a arquivos `.pdf`, `.txt` (Drag-and-drop) ou entrada de texto manual. |
+| **🧠 Análise Híbrida** | Validação cruzada entre algoritmo de regras (Stemming) e IA Generativa. |
+| **🎨 UI Responsiva** | Interface limpa e moderna construída com **Tailwind CSS**. |
+| **⚡ Performance** | Uso de **Tabelas Hash** para verificação instantânea de palavras-chave. |
+| **🛡️ Segurança** | Validação de MIME Types, proteção CSRF e variáveis de ambiente (`.env`). |
+| **📝 Smart Reply** | Geração automática de respostas técnicas e educadas via Gemini Pro. |
 
-1. Clone o repositório
-Bash
+---
 
-git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
-cd InterpretadorDeEmail
-2. Crie e ative o ambiente virtual
-Recomendado para isolar as dependências do projeto.
+## 🧠 Como Funciona (O "Cérebro")
 
-No macOS / Linux:
+O diferencial do projeto é o sistema de **Consenso**. O sistema só confirma a classificação se o método clássico e a IA concordarem.
 
-Bash
-
-python3 -m venv venv
-source venv/bin/activate
-No Windows:
-
-Bash
-
-python -m venv venv
-.\venv\Scripts\activate
-3. Instale as dependências
-Bash
-
-pip install -r requirements.txt
-(Nota: Se o arquivo requirements.txt ainda não existir, instale manualmente as libs usadas: django, google-generativeai, python-dotenv, nltk, pypdf)
-
-4. Configure as Variáveis de Ambiente
-Por segurança, a chave da API não é versionada.
-
-Crie um arquivo chamado .env na raiz do projeto (mesma pasta do manage.py).
-
-Adicione sua chave do Gemini nele:
-
-Snippet de código
-
-GEMINI_API_KEY=sua_chave_secreta_aqui_sem_aspas
-5. Configuração do Banco de Dados e Arquivos Estáticos
-Execute as migrações iniciais do Django:
-
-Bash
-
-python manage.py makemigrations
-python manage.py migrate
-6. Execute o Servidor
-Bash
-
-python manage.py runserver
-Acesse a aplicação em seu navegador: http://127.0.0.1:8000/
-
-📂 Estrutura do Projeto
-Plaintext
-
-InterpretadorDeEmail/
-├── core/
-│   ├── static/
-│   │   ├── css/style.css      # Estilos personalizados
-│   │   └── js/script.js       # Lógica de Drag & Drop e UI
-│   ├── templates/
-│   │   └── home.html          # Template principal
-│   ├── forms.py               # Validação de uploads
-│   ├── models.py              # Modelo de banco de dados
-│   ├── nlp_service.py         # Cérebro da aplicação (Regras + IA)
-│   └── views.py               # Lógica de controle
-├── config/                    # Configurações do Django (settings, urls)
-├── media/                     # Arquivos temporários (uploads)
-├── .env                       # Variáveis de ambiente (NÃO COMITAR)
-├── .gitignore                 # Arquivos ignorados pelo Git
-└── manage.py
-🧠 Como funciona a Lógica Híbrida
-O sistema processa cada email em 4 etapas:
-
-Pré-processamento: O texto é limpo, acentos são removidos (unicodedata), Stop Words são eliminadas e as palavras são reduzidas ao seu radical (Stemming com RSLP).
-
-Classificação por Regras: O algoritmo verifica a presença dos radicais em tabelas Hash de palavras "Produtivas" (ex: problem, err, ajud) e "Improdutivas" (ex: obrig, paraben).
-
-Consulta à IA: O texto original e as palavras-chave processadas são enviados ao Gemini Pro, que analisa o contexto semântico.
-
-Consenso:
-
-Se Regras e IA concordam (ex: ambos dizem "Produtivo") -> Sucesso ✅.
-
-Se discordam -> O sistema emite um alerta de ambiguidade ⚠️.
+```mermaid
+graph TD
+    A[📩 Entrada do Usuário] --> B{Tipo de Entrada?}
+    B -- Arquivo (PDF/TXT) --> C[Extrator de Texto]
+    B -- Texto Direto --> D[Texto Bruto]
+    C --> D
+    
+    D --> E[⚙️ NLP Clássico]
+    D --> F[🤖 IA Gemini Pro]
+    
+    subgraph "Processamento Paralelo"
+    E --> E1[Remover Acentos & Stopwords]
+    E1 --> E2[Stemming (RSLP)]
+    E2 --> E3[Busca em Hash Table]
+    E3 --> E4(Classificação: Regras)
+    
+    F --> F1[Análise Semântica]
+    F1 --> F2[Geração de Resposta]
+    F2 --> F3(Classificação: IA)
+    end
+    
+    E4 --> G{❓ Consenso?}
+    F3 --> G
+    
+    G -- ✅ Sim (Iguais) --> H[Exibir Resultado & Resposta]
+    G -- ❌ Não (Diferentes) --> I[⚠️ Alerta de Ambiguidade]
