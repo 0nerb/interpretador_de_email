@@ -37,7 +37,7 @@
 
 O **Interpretador de Email Inteligente** é uma solução web que automatiza a triagem de caixas de entrada. Diferente de soluções comuns, ele utiliza uma **arquitetura de consenso**: combina a velocidade de regras baseadas em NLP clássico (NLTK) com a compreensão contextual de LLMs (Google Gemini).
 
-O objetivo é separar o joio do trigo: identificar emails **Produtivos** (que exigem suporte técnico) de emails **Improdutivos** (agradecimentos, SPAM), sugerindo respostas automáticas precisas.
+O objetivo é ter mais controle sobre a classificação: identificar emails **Produtivos** (que exigem suporte técnico) de emails **Improdutivos** (agradecimentos, SPAM), sugerindo respostas automáticas precisas.
 
 ---
 
@@ -49,8 +49,8 @@ O objetivo é separar o joio do trigo: identificar emails **Produtivos** (que ex
 | **🧠 Análise Híbrida** | Validação cruzada entre algoritmo de regras (Stemming) e IA Generativa. |
 | **🎨 UI Responsiva** | Interface limpa e moderna construída com **Tailwind CSS**. |
 | **⚡ Performance** | Uso de **Tabelas Hash** para verificação instantânea de palavras-chave. |
-| **🛡️ Segurança** | Validação de MIME Types, proteção CSRF e variáveis de ambiente (`.env`). |
-| **📝 Smart Reply** | Geração automática de respostas técnicas e educadas via Gemini Pro. |
+| **🛡️ Segurança** | Validação de MIME Types, proteção CSRF e validação de tamanho de arquivo. |
+| **📝 Smart Reply** | Geração automática de respostas técnicas e educadas via Gemini. |
 
 ---
 
@@ -99,7 +99,7 @@ graph TD
 #### 1. Clone o repositório
 
 ```bash
-git clone [https://github.com/SEU-USUARIO/interpretador-email.git](https://github.com/SEU-USUARIO/interpretador-email.git)
+git clone [https://github.com/0nerb/interpretador_de_email.git](https://github.com/0nerb/interpretador_de_email.git)
 cd interpretador-email
 
 ```
@@ -135,11 +135,3 @@ python manage.py runserver
 - **Python-dotenv**: Gerenciamento de segurança.
 - **Unicodedata**: Normalização de texto.
 
-## 🔑 Funcionalidades
-
-- **Upload Flexível**: Suporte a arquivos `.pdf`, `.txt` (Drag-and-drop) ou entrada de texto manual.
-- **Análise Híbrida**: Validação cruzada entre algoritmo de regras (Stemming) e IA Generativa.
-- **UI Responsiva**: Interface limpa construída com Tailwind CSS.
-- **Performance**: Uso de Tabelas Hash (Sets) para verificação instantânea de palavras-chave (Complexidade O(1)).
-- **Segurança**: Validação de MIME Types e proteção CSRF.
-- **Smart Reply**: Geração automática de respostas técnicas e educadas via Gemini Pro.
