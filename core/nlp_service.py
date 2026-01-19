@@ -8,16 +8,12 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import RSLPStemmer
 
-# --- CONFIGURAÇÕES INICIAIS ---
-
-# 1. Carrega variáveis de ambiente
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
 if api_key:
     genai.configure(api_key=api_key)
 
-# 2. Configurações do NLTK (Baixa dicionários se não tiver)
 def baixar_recursos_nltk():
     recursos = ['punkt', 'stopwords', 'rslp', 'punkt_tab']
     for recurso in recursos:
@@ -34,7 +30,6 @@ def baixar_recursos_nltk():
 
 baixar_recursos_nltk()
 
-# --- FUNÇÕES DE ARQUIVO ---
 
 def ler_arquivo(caminho_arquivo):
     """Lê o conteúdo bruto de PDF ou TXT"""
@@ -56,7 +51,6 @@ def ler_arquivo(caminho_arquivo):
 
     return texto_completo
 
-# --- CAMADA 1: PRÉ-PROCESSAMENTO (NLP CLÁSSICO) ---
 
 def realizar_preprocessamento(texto):
     """
@@ -76,22 +70,15 @@ def realizar_preprocessamento(texto):
             raiz = unidecode(raiz)
             tokens_uteis.append(raiz)
             
-    # MUDANÇA AQUI: Retorna a LISTA ['palavra', 'palavra'], não a STRING "palavra palavra"
     return tokens_uteis
 def classificar_por_regras(tokens_processados):
-    """
-    Classifica baseando-se na contagem de palavras-chave (stems).
-    O uso de SETS {} (Hash Table) torna a busca instantânea.
-    """
-    
-    # CONJUNTO DE PALAVRAS PRODUTIVAS (HASH TABLE)
+
     stems_produtivos = {
         'err', 'falh', 'suport', 'ajud', 'duvid', 'problem', 'urgent',
         'acess', 'bug', 'solicit', 'precis', 'trav', 'atualiz', 'orcament',
         'cot', 'ped', 'envi', 'nao', 'funcion', 'aus'
     }
     
-    # CONJUNTO DE PALAVRAS IMPRODUTIVAS (HASH TABLE)
     stems_improdutivos = {
         'obrig', 'paraben', 'valeu', 'agradec', 'bom', 'tard', 'noit', 
         'felic', 'excel', 'grati', 'ok', 'cient', 'recebid', 'abrac', 'perfeit'
@@ -100,14 +87,12 @@ def classificar_por_regras(tokens_processados):
     score_produtivo = 0
     score_improdutivo = 0
     
-    # Loop único: Verifica cada token diretamente nas tabelas hash
     for token in tokens_processados:
         if token in stems_produtivos:
             score_produtivo += 1
         elif token in stems_improdutivos:
             score_improdutivo += 1
-            
-    # Lógica de decisão final
+
     if score_produtivo > 0:
         return "Produtivo"
     elif score_improdutivo > 0:
@@ -115,8 +100,6 @@ def classificar_por_regras(tokens_processados):
     else:
         return "Indefinido"
 
-# --- ETAPA 3: IA (GEMINI) ---
-# Adicione o parametro tokens_processados aqui
 def consultar_gemini(texto_original, tokens_processados_str=""):
     if not api_key: return None
 
@@ -143,7 +126,6 @@ def consultar_gemini(texto_original, tokens_processados_str=""):
         response = model.generate_content(prompt)
         text = response.text
         
-        # Parser simples
         resultado = {"categoria": "Indefinido", "motivo": "", "sugestao_resposta": ""}
         linhas = text.split('\n')
         buffer = []
@@ -167,19 +149,10 @@ def consultar_gemini(texto_original, tokens_processados_str=""):
     except:
         return None
    
-# --- ETAPA 4: ORQUESTRADOR E COMPARAÇÃO (NOVO) ---
 def processar_email_completo(texto_original):
-    # 1. Pré-processamento (Agora retorna uma LISTA)
     tokens_lista = realizar_preprocessamento(texto_original)
-    
-    # 2. Classificação via Regras (Agora funciona, pois recebe uma LISTA)
     classificacao_regras = classificar_por_regras(tokens_lista)
-    
-    # 3. Classificação via IA
-    # OBS: Aqui convertemos a lista em string só para o Gemini ler melhor
     tokens_string_para_ia = " ".join(tokens_lista) 
-    
-    # Passamos o texto original E a string de tokens para a função da IA
     resultado_ia = consultar_gemini(texto_original, tokens_string_para_ia)
     
     if not resultado_ia:
@@ -189,8 +162,6 @@ def processar_email_completo(texto_original):
         }
 
     classificacao_ia = resultado_ia["categoria"]
-    
-    # ... (O resto da lógica de comparação continua igual) ...
     
     match_produtivo = ("produtivo" in classificacao_regras.lower() and "produtivo" in classificacao_ia.lower())
     match_improdutivo = ("improdutivo" in classificacao_regras.lower() and "improdutivo" in classificacao_ia.lower())

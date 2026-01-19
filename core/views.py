@@ -17,7 +17,6 @@ def home(request):
                 texto_para_analise = obj.texto_direto
             
             if texto_para_analise:
-                # Chama a nova função mestre
                 resultado_final = processar_email_completo(texto_para_analise)
             
             return render(request, 'home.html', {

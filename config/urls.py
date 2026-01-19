@@ -9,6 +9,5 @@ urlpatterns = [
     path('', home, name='home'),
 ]
 
-# Configuração para servir arquivos de media durante o desenvolvimento
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

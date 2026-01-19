@@ -51,14 +51,11 @@
             <h1 class="text-2xl font-bold text-white mb-1">Enviar Email</h1>
             <p class="text-indigo-100 text-sm">Faça o upload ou digite seu email abaixo</p>
         </div>
-        <!-- Corpo do Formulário -->
         <div class="p-8">
             <form id="uploadForm" action="#" method="post" enctype="multipart/form-data" class="space-y-6">
 
-                <!-- IMPORTANTE: Adicione a tag CSRF do Django aqui -->
                 {% csrf_token %}
 
-                <!-- Zona de Upload (Drag & Drop) -->
                 <div class="relative group">
                     <label for="file-upload" id="drop-zone"
                         class="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer bg-slate-50 transition-all duration-300 hover:bg-slate-100 hover:border-indigo-400">
@@ -72,12 +69,10 @@
                             <p class="text-[10px] text-slate-400">PDF, TXT (Max. 10MB)</p>
                         </div>
 
-                        <!-- Input Invisível (Mantém o funcionamento nativo) -->
                         <input id="file-upload" name="arquivo" type="file" class="hidden" />
                     </label>
                 </div>
 
-                <!-- Card de Informação do Arquivo (Inicialmente Oculto) -->
                 <div id="file-info" class="hidden animate-fade-in">
                     <div class="flex items-center bg-indigo-50 p-3 rounded-lg border border-indigo-100 shadow-sm">
                         <div class="bg-indigo-100 p-2 rounded-md mr-3 text-indigo-600">
@@ -95,7 +90,6 @@
                     </div>
                 </div>
 
-                <!-- Divisor "OU" -->
                 <div class="relative flex py-1 items-center">
                     <div class="flex-grow border-t border-slate-200"></div>
                     <span class="flex-shrink-0 mx-4 text-slate-400 text-xs uppercase font-medium">Ou digite o
@@ -103,7 +97,6 @@
                     <div class="flex-grow border-t border-slate-200"></div>
                 </div>
 
-                <!-- Novo Campo de Texto -->
                 <div>
                     <label for="text-input" class="block text-sm font-medium text-slate-700 mb-2">
                         <i class="fa-solid fa-pen-nib text-indigo-500 mr-1"></i> Inserir Email Manualmente
@@ -113,7 +106,6 @@
                         placeholder="Escreva ou cole seu texto aqui para processamento..."></textarea>
                 </div>
 
-                <!-- Botão de Enviar -->
                 <button type="submit" id="submit-btn"
                     class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg shadow-indigo-200 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 group mt-2">
                     <span>Processar Email</span>
@@ -123,7 +115,6 @@
             </form>
         </div>
 
-        <!-- Rodapé -->
         <div class="bg-slate-50 px-8 py-4 border-t border-slate-100 text-center">
             <p class="text-xs text-slate-400 flex items-center justify-center gap-1">
                 <i class="fa-solid fa-lock text-[10px]"></i> Ambiente seguro e criptografado.

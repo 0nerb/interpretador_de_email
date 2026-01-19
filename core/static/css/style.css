@@ -1,9 +1,7 @@
-/* Configurações Globais de Fonte */
 body {
     font-family: 'Inter', sans-serif;
 }
 
-/* Animações e Efeitos */
 .animate-fade-in {
     animation: fadeIn 0.3s ease-out forwards;
 }
@@ -20,16 +18,12 @@ body {
     }
 }
 
-/* Estado Ativo do Drag & Drop (Arrastar) */
 .drag-active {
     border-color: #4F46E5 !important;
-    /* Indigo 600 */
     background-color: #EEF2FF !important;
-    /* Indigo 50 */
     transform: scale(1.02);
 }
 
-/* Estilização da Barra de Rolagem */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -58,7 +52,6 @@ body {
     width: 30px;
     height: 30px;
     background-color: #4a90e2;
-    /* Azul do seu tema */
     color: white;
     border-radius: 50%;
     text-align: center;
@@ -75,8 +68,6 @@ body {
     transform: scale(1.1);
     background-color: #357abd;
 }
-
-/* O balão de texto (Tooltip) */
 .help-tooltip {
     visibility: hidden;
     width: 280px;
@@ -88,7 +79,6 @@ body {
     position: absolute;
     z-index: 1;
     top: 100%;
-    /* Posiciona abaixo do ícone */
     right: 0;
     margin-top: 10px;
     opacity: 0;
@@ -98,7 +88,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* A setinha do balão */
 .help-tooltip::after {
     content: "";
     position: absolute;
@@ -109,13 +98,11 @@ body {
     border-color: transparent transparent #333 transparent;
 }
 
-/* Mostrar o tooltip quando passar o mouse no container */
 .help-container:hover .help-tooltip {
     visibility: visible;
     opacity: 1;
 }
 
-/* Destaque para o formato */
 .code-snippet {
     background-color: #444;
     padding: 8px;
