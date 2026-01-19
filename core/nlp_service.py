@@ -32,7 +32,6 @@ baixar_recursos_nltk()
 
 
 def ler_arquivo(caminho_arquivo):
-    """Lê o conteúdo bruto de PDF ou TXT"""
     ext = os.path.splitext(caminho_arquivo)[1].lower()
     texto_completo = ""
 
@@ -53,9 +52,6 @@ def ler_arquivo(caminho_arquivo):
 
 
 def realizar_preprocessamento(texto):
-    """
-    Aplica técnicas de NLP e RETORNA UMA LISTA.
-    """
     if not texto: return []
 
     tokens = word_tokenize(texto.lower(), language='portuguese')
