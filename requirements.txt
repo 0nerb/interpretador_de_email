@@ -18,6 +18,7 @@ joblib==1.5.3
 nltk==3.9.2
 proto-plus==1.27.0
 protobuf==5.29.5
+PyPDF2==3.0.1
 pyasn1==0.6.2
 pyasn1_modules==0.4.2
 pydantic==2.12.5
